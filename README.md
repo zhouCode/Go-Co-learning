@@ -105,17 +105,17 @@ Co-learning-repo/
 
 ### 学生权限
 - ✅ **可以做的事情：**
+  - 直接push到主分支（受权限系统保护）
   - 修改自己文件夹内的所有文件（基于映射表验证）
   - 在自己的 `note.md` 中记录学习笔记
   - 在自己的 `code/` 文件夹中编写和修改代码
-  - 查看其他同学的公开文件（只读）
-  - 提交Pull Request到自己的文件夹
+  - 提交和推送代码更改
 
 - ❌ **不能做的事情：**
   - 修改其他同学的文件夹
-  - 修改根目录下的配置文件
-  - 删除其他同学的文件
-  - 直接推送到主分支
+  - 修改根目录的配置文件（README.md、.gitignore等）
+  - 修改GitHub Actions工作流
+  - 修改学生映射表
 
 ### 教师权限
 - 拥有仓库的完全管理权限
@@ -125,48 +125,29 @@ Co-learning-repo/
 
 ## 🚀 使用指南
 
-### 1. 克隆仓库
-```bash
-git clone https://github.com/your-username/Co-learning-repo.git
-cd Co-learning-repo
-```
+### 🚀 学生使用流程
 
-### 2. 创建个人分支
-```bash
-# 创建并切换到个人分支（建议使用学号命名）
-git checkout -b student-2023111423
-```
+1. **克隆仓库**
+   ```bash
+   git clone https://github.com/teacher-username/co-learning-repo.git
+   cd co-learning-repo
+   ```
 
-### 3. 修改个人文件
-```bash
-# 进入自己的文件夹
-cd 23区块链01班_2023111423_费沁烽/
+2. **找到自己的文件夹**
+   - 文件夹格式：`23区块链XX班_你的学号_你的姓名`
 
-# 编辑学习笔记
-notepad note.md
+3. **编辑和学习**
+   - 修改 `note.md` 记录学习笔记
+   - 在 `code/` 文件夹中编写代码
 
-# 编写Go代码
-cd code/
-notepad main.go
-```
+4. **提交更改**
+   ```bash
+   git add .
+   git commit -m "更新学习笔记和代码"
+   git push origin main
+   ```
 
-### 4. 提交更改
-```bash
-# 添加修改的文件
-git add .
-
-# 提交更改
-git commit -m "更新学习笔记和代码练习"
-
-# 推送到个人分支
-git push origin student-2023111423
-```
-
-### 5. 创建Pull Request
-1. 在GitHub网页上点击 "Compare & pull request"
-2. 确保只修改了自己的文件夹
-3. 填写清晰的提交说明
-4. 等待教师审核和合并
+**注意**：由于有GitHub Actions权限检查，学生可以直接push到主分支，系统会自动验证权限，只允许修改自己的文件夹。
 
 ## 📝 学习笔记模板
 
@@ -215,9 +196,10 @@ go run main.go
 ## 🛡️ 安全规则
 
 1. **文件夹隔离**：每个学生只能修改自己的文件夹
-2. **分支保护**：主分支受保护，需要通过Pull Request提交
-3. **自动检查**：GitHub Actions会自动检查提交是否违反权限规则
-4. **代码审查**：所有提交都需要教师审核
+2. **权限验证**：GitHub Actions自动检查文件修改权限
+3. **实时保护**：每次push都会触发权限检查
+4. **映射表验证**：基于学号到GitHub用户名的映射表进行身份验证
+5. **教师监督**：教师可以查看所有提交历史和修改记录
 
 ## 🔧 仓库设置
 
@@ -247,9 +229,9 @@ go run main.go
    ```
 
 3. **设置仓库权限**
-   - 在GitHub仓库设置中启用分支保护规则
-   - 要求Pull Request审核
-   - 启用状态检查（GitHub Actions）
+   - 将学生添加为仓库协作者（Write权限）
+   - 启用GitHub Actions进行权限检查
+   - 可选：设置分支保护规则（如需要额外安全层）
 
 4. **邀请学生**
    - 将学生添加为仓库协作者
@@ -264,7 +246,9 @@ go run main.go
    ```
 3. **确认自己的文件夹**
    - 找到格式为 `23区块链XX班_你的学号_你的姓名` 的文件夹
-4. **开始学习和提交代码**
+4. **开始学习和直接提交**
+   - 修改文件后可以直接push到main分支
+   - 系统会自动验证权限，确保只能修改自己的文件夹
 
 ## 📞 联系方式
 
