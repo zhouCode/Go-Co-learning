@@ -8,12 +8,18 @@
 
 #### 📝 完成笔记后的提交步骤
 
-**步骤1：保存笔记文件**
+**步骤1：拉取最新代码**
+```bash
+# 【重要】开始工作前先拉取最新的远程代码
+git pull origin main
+```
+
+**步骤2：保存笔记文件**
 - 在您的专属文件夹中编辑 `note.md` 文件
 - 使用 `Ctrl+S`（Windows）或 `Cmd+S`（Mac）保存文件
 - 确保文件内容已正确保存
 
-**步骤2：添加变更到Git**
+**步骤3：添加变更到Git**
 ```bash
 # 添加您的笔记文件到Git暂存区
 git add 您的文件夹名/note.md
@@ -22,13 +28,13 @@ git add 您的文件夹名/note.md
 git add 您的文件夹名/
 ```
 
-**步骤3：提交变更**
+**步骤4：提交变更**
 ```bash
 # 提交变更并添加描述信息
 git commit -m "更新学习笔记：添加第X章内容"
 ```
 
-**步骤4：推送到远程仓库**
+**步骤5：推送到远程仓库**
 ```bash
 # 推送到GitHub远程仓库
 git push origin main
@@ -36,12 +42,18 @@ git push origin main
 
 #### 💻 完成代码后的提交步骤
 
-**步骤1：保存代码文件**
+**步骤1：拉取最新代码**
+```bash
+# 【重要】开始工作前先拉取最新的远程代码
+git pull origin main
+```
+
+**步骤2：保存代码文件**
 - 在您的 `code/` 文件夹中编辑代码文件
 - 确保代码能够正常运行（可以先本地测试）
 - 保存所有修改的文件
 
-**步骤2：添加代码变更**
+**步骤3：添加代码变更**
 ```bash
 # 添加代码文件到Git暂存区
 git add 您的文件夹名/code/
@@ -50,7 +62,7 @@ git add 您的文件夹名/code/
 git add 您的文件夹名/code/main.go
 ```
 
-**步骤3：编写有意义的提交信息**
+**步骤4：编写有意义的提交信息**
 ```bash
 # 提交代码变更，使用清晰的描述
 git commit -m "完成Go语言基础练习：实现冒泡排序算法"
@@ -62,7 +74,7 @@ git commit -m "添加新功能：
 - 修复边界条件bug"
 ```
 
-**步骤4：推送代码**
+**步骤5：推送代码**
 ```bash
 # 推送到远程仓库
 git push origin main
@@ -76,31 +88,36 @@ git push origin main
 # 1. 首先确认当前位置（应该在仓库根目录）
 pwd
 
-# 2. 查看当前文件状态
+# 2. 【重要】拉取最新的远程代码（避免冲突）
+git pull origin main
+
+# 3. 查看当前文件状态
 git status
 
-# 3. 添加所有变更（推荐方式）
+# 4. 添加所有变更（推荐方式）
 git add 您的文件夹名/
 
-# 4. 查看即将提交的内容
+# 5. 查看即将提交的内容
 git status
 
-# 5. 提交变更
+# 6. 提交变更
 git commit -m "学习记录更新：完成第3章区块链基础知识学习和Go语言练习"
 
-# 6. 推送到远程仓库
+# 7. 推送到远程仓库
 git push origin main
 ```
 
 #### ⚠️ 重要注意事项
 
 **文件操作注意事项：**
+- ✅ **每次开始工作前必须先拉取最新代码** (`git pull origin main`)
 - ✅ 只修改您自己的文件夹内容
 - ✅ 确保文件保存后再执行Git命令
 - ❌ 不要修改其他同学的文件夹
 - ❌ 不要修改根目录的配置文件
 
 **Git命令注意事项：**
+- **🔥 重要：每次开始工作前先执行 `git pull origin main` 避免冲突**
 - 提交信息要清晰明了，描述您做了什么
 - 每次学习后及时提交，不要积累太多变更
 - 如果遇到冲突，请联系老师协助解决
@@ -121,6 +138,67 @@ git log --oneline   # 查看提交历史
 2. 使用 `git status` 查看当前状态
 3. 确认您在正确的目录下操作
 4. 如有疑问，及时联系老师或同学
+
+## 🔧 故障排除和常见问题
+
+### 常见Git错误及解决方案
+
+**问题1：推送时提示权限被拒绝**
+```
+ERROR: Permission denied (publickey)
+```
+**解决方案：**
+- 检查是否已正确配置SSH密钥
+- 确认GitHub用户名在映射表中正确配置
+- 联系教师确认仓库访问权限
+
+**问题2：推送时出现合并冲突**
+```
+error: failed to push some refs to 'origin'
+hint: Updates were rejected because the remote contains work that you do not have locally
+```
+**解决方案：**
+```bash
+# 先拉取远程更新
+git pull origin main
+
+# 如果有冲突，手动解决冲突后再推送
+git add .
+git commit -m "解决合并冲突"
+git push origin main
+```
+
+**问题3：提交时提示"nothing to commit"**
+```
+nothing to commit, working tree clean
+```
+**解决方案：**
+- 确认文件已保存（Ctrl+S）
+- 检查是否在正确的文件夹中修改了文件
+- 使用 `git status` 查看文件状态
+
+**问题4：GitHub Actions检查失败**
+```
+Permission check failed: You can only modify files in your own folder
+```
+**解决方案：**
+- 确认只修改了自己的文件夹
+- 检查文件路径是否正确
+- 确认GitHub用户名与学号映射正确
+
+### 操作建议
+
+**最佳实践：**
+- ✅ 每次工作前先执行 `git pull origin main`
+- ✅ 频繁提交，避免积累太多变更
+- ✅ 使用有意义的提交信息
+- ✅ 定期备份重要代码
+
+**避免的操作：**
+- ❌ 不要强制推送（`git push -f`）
+- ❌ 不要修改其他同学的文件
+- ❌ 不要在多个设备上同时编辑同一文件
+- ❌ 不要忽略Git的警告信息
 
 ---
 
@@ -253,25 +331,38 @@ Co-learning-repo/
 
 1. **克隆仓库**
    ```bash
-   git clone https://github.com/teacher-username/co-learning-repo.git
-   cd co-learning-repo
+   git clone https://github.com/zhouCode/Go-Co-learning.git
+   cd Go-Co-learning
    ```
 
 2. **找到自己的文件夹**
    - 文件夹格式：`23区块链XX班_你的学号_你的姓名`
 
-3. **编辑和学习**
+3. **开始学习前的准备**
+   ```bash
+   # 【重要】每次开始工作前先拉取最新代码
+   git pull origin main
+   ```
+
+4. **编辑和学习**
    - 修改 `note.md` 记录学习笔记
    - 在 `code/` 文件夹中编写代码
 
-4. **提交更改**
+5. **提交更改**
    ```bash
-   git add .
+   # 添加变更
+   git add 您的文件夹名/
+   
+   # 提交变更
    git commit -m "更新学习笔记和代码"
+   
+   # 推送到远程仓库
    git push origin main
    ```
 
 **注意**：由于有GitHub Actions权限检查，学生可以直接push到主分支，系统会自动验证权限，只允许修改自己的文件夹。
+
+> 💡 **提示**：详细的操作步骤请参考文档开头的 [📖 学生操作手册](#-学生操作手册) 部分。
 
 ## 📝 学习笔记模板
 
@@ -366,7 +457,7 @@ go run main.go
 1. **接受仓库邀请**
 2. **克隆仓库**
    ```bash
-   git clone https://github.com/teacher-username/co-learning-repo.git
+   git clone https://github.com/zhouCode/Go-Co-learning.git
    ```
 3. **确认自己的文件夹**
    - 找到格式为 `23区块链XX班_你的学号_你的姓名` 的文件夹
@@ -377,8 +468,11 @@ go run main.go
 ## 📞 联系方式
 
 如有问题，请联系：
-- **教师邮箱**: teacher@example.com
-- **课程群**: 区块链专业学习群
+- **教师邮箱**: [请教师填写实际邮箱地址]
+- **课程群**: [请填写实际的课程群信息]
+- **GitHub Issues**: 可以在本仓库创建Issue反馈问题
+
+> 💡 **提示**：建议教师在部署时更新上述联系方式为实际的联系信息。
 
 ## 📄 许可证
 

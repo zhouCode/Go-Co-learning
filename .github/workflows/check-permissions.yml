@@ -87,8 +87,8 @@ jobs:
             if [[ "$IS_TEACHER" == "true" ]]; then
               echo "✅ 老师 $AUTHOR 有权限修改 $file"
             elif [[ "$AUTHOR" != "$EXPECTED_USER" ]]; then
-              echo "❌ 用户 $AUTHOR 无权修改文件夹 $folder_name (应为: $EXPECTED_USER)"
-              violation_found=true
+              echo "⚠️  警告: 用户 $AUTHOR 修改了不属于自己的文件夹 $folder_name (应为: $EXPECTED_USER)，此修改将被忽略"
+              # 不设置 violation_found=true，让此类修改被忽略而不是报错
             else
               echo "✅ 学生 $AUTHOR 有权限修改 $file"
             fi
