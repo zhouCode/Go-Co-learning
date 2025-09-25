@@ -1,4 +1,4 @@
-name: 检查文件夹权限
+name: Check Student Folder Permissions
 
 on:
   pull_request:
@@ -7,25 +7,20 @@ on:
     branches: [ main ]
 
 jobs:
-  check-folder-permissions:
+  check-permissions:
     runs-on: ubuntu-latest
-    name: 检查学生是否只修改了自己的文件夹
     
     steps:
-    - name: 检出代码
-      uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v3
       with:
         fetch-depth: 0
     
-    - name: 获取变更的文件
+    - name: Get changed files
       id: changed-files
-      uses: tj-actions/changed-files@v40
-      with:
-        files: |
-          23区块链*班_*_*/**
-    
-    - name: 检查权限
-      if: steps.changed-files.outputs.any_changed == 'true'
+      uses: tj-actions/changed-files@v35
+      
+    - name: Check permissions
       run: |
         echo "检测到以下文件发生变更:"
         echo "${{ steps.changed-files.outputs.all_changed_files }}"
@@ -39,67 +34,73 @@ jobs:
           echo "提交者: $AUTHOR"
         fi
         
+        # 读取学号到GitHub用户名的映射表
+        MAPPING_FILE=".github/student-mapping.json"
+        if [[ ! -f "$MAPPING_FILE" ]]; then
+          echo "❌ 错误: 找不到学生映射表文件 $MAPPING_FILE"
+          exit 1
+        fi
+        
+        echo "✅ 成功加载学生映射表"
+        
         # 检查每个变更的文件
         violation_found=false
         
         for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
           echo "检查文件: $file"
           
-          # 提取文件夹名称（学生文件夹格式：23区块链XX班_学号_姓名）
-          folder_name=$(echo "$file" | cut -d'/' -f1)
-          
-          # 检查是否是学生文件夹
-          if [[ $folder_name =~ ^23区块链[0-9]+班_[0-9]+_.+$ ]]; then
+          # 检查是否修改了根目录的关键文件
+          if [[ "$file" =~ ^(README\.md|\.gitignore|CODEOWNERS|\.github/.*|create_.*\.py|studentInfo\.xlsx)$ ]]; then
+            echo "这是根目录关键文件: $file"
+            
+            # 检查是否是老师
+            IS_TEACHER=$(jq -r --arg author "$AUTHOR" '.teachers | index($author) != null' "$MAPPING_FILE")
+            if [[ "$IS_TEACHER" != "true" ]]; then
+              echo "❌ 错误: 只有老师可以修改根目录文件。用户 $AUTHOR 无权限。"
+              violation_found=true
+            else
+              echo "✅ 老师 $AUTHOR 有权限修改根目录文件 $file"
+            fi
+            
+          # 检查学生文件夹
+          elif [[ "$file" =~ ^23区块链[0-9]+班_[0-9]+_[^/]+/ ]]; then
+            # 提取文件夹名称
+            folder_name=$(echo "$file" | cut -d'/' -f1)
             echo "这是学生文件夹: $folder_name"
             
             # 提取学号
             student_id=$(echo "$folder_name" | sed -n 's/^23区块链[0-9]\+班_\([0-9]\+\)_.*/\1/p')
             echo "学号: $student_id"
             
-            # 这里可以添加更复杂的权限检查逻辑
-            # 例如：检查GitHub用户名是否与学号匹配
-            # 或者维护一个学号到GitHub用户名的映射表
+            # 从映射表中获取对应的GitHub用户名
+            EXPECTED_USER=$(jq -r --arg id "$student_id" '.student_mapping[$id] // empty' "$MAPPING_FILE")
             
-            echo "✅ 文件 $file 在允许的学生文件夹中"
+            if [[ -z "$EXPECTED_USER" ]]; then
+              echo "❌ 错误: 找不到学号 $student_id 对应的GitHub用户名"
+              violation_found=true
+              continue
+            fi
+            
+            # 检查是否是老师（老师可以修改任何文件）
+            IS_TEACHER=$(jq -r --arg author "$AUTHOR" '.teachers | index($author) != null' "$MAPPING_FILE")
+            
+            if [[ "$IS_TEACHER" == "true" ]]; then
+              echo "✅ 老师 $AUTHOR 有权限修改 $file"
+            elif [[ "$AUTHOR" != "$EXPECTED_USER" ]]; then
+              echo "❌ 用户 $AUTHOR 无权修改文件夹 $folder_name (应为: $EXPECTED_USER)"
+              violation_found=true
+            else
+              echo "✅ 学生 $AUTHOR 有权限修改 $file"
+            fi
+            
           else
-            echo "❌ 检测到对非学生文件夹的修改: $file"
-            echo "学生只能修改自己的文件夹（格式：23区块链XX班_学号_姓名）"
-            violation_found=true
+            echo "⚠️  警告: 文件 $file 不在已识别的模式中"
           fi
         done
         
         if [ "$violation_found" = true ]; then
-          echo "❌ 权限检查失败！发现违规修改。"
-          echo "请确保只修改自己的文件夹内容。"
+          echo "❌ 权限检查失败！发现违规操作。"
           exit 1
         else
-          echo "✅ 权限检查通过！所有修改都在允许的范围内。"
-        fi
-    
-    - name: 检查根目录文件
-      run: |
-        # 检查是否修改了根目录的重要文件
-        root_files_changed=$(git diff --name-only HEAD~1 HEAD | grep -E '^(README\.md|\.gitignore|\.github/|create_.*\.py|studentInfo\.xlsx)$' || true)
-        
-        if [ -n "$root_files_changed" ] && [ "${{ github.actor }}" != "teacher-username" ]; then
-          echo "❌ 检测到对根目录重要文件的修改:"
-          echo "$root_files_changed"
-          echo "学生不允许修改这些文件，只有教师可以修改。"
-          exit 1
-        fi
-        
-        echo "✅ 根目录文件检查通过。"
-    
-    - name: 输出检查结果
-      if: always()
-      run: |
-        if [ $? -eq 0 ]; then
-          echo "🎉 所有权限检查都通过了！"
-          echo "您的修改符合仓库规则。"
-        else
-          echo "❌ 权限检查失败。"
-          echo "请检查您的修改是否符合以下规则："
-          echo "1. 只能修改自己的文件夹（23区块链XX班_学号_姓名）"
-          echo "2. 不能修改其他同学的文件夹"
-          echo "3. 不能修改根目录的配置文件"
+          echo "✅ 所有权限检查通过！"
         fi
