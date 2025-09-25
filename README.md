@@ -129,8 +129,8 @@ Co-learning-repo/
 
 1. **克隆仓库**
    ```bash
-   git clone https://github.com/teacher-username/co-learning-repo.git
-   cd co-learning-repo
+   git clone https://github.com/zhouCode/Go-Co-learning.git
+   cd Go-Co-learning
    ```
 
 2. **找到自己的文件夹**
@@ -242,7 +242,7 @@ go run main.go
 1. **接受仓库邀请**
 2. **克隆仓库**
    ```bash
-   git clone https://github.com/teacher-username/co-learning-repo.git
+   git clone https://github.com/zhouCode/Go-Co-learning.git
    ```
 3. **确认自己的文件夹**
    - 找到格式为 `23区块链XX班_你的学号_你的姓名` 的文件夹
@@ -250,11 +250,6 @@ go run main.go
    - 修改文件后可以直接push到main分支
    - 系统会自动验证权限，确保只能修改自己的文件夹
 
-## 📞 联系方式
-
-如有问题，请联系：
-- **教师邮箱**: teacher@example.com
-- **课程群**: 区块链专业学习群
 
 ## 📄 许可证
 

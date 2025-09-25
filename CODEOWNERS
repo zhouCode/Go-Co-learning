@@ -3,15 +3,15 @@
 # 当有人提交PR修改这些路径时，需要相应的所有者审核
 
 # 根目录文件只有教师可以修改
-* @teacher-username
-README.md @teacher-username
-.gitignore @teacher-username
-.github/ @teacher-username
-*.py @teacher-username
-*.xlsx @teacher-username
+* @zhouCode
+README.md @zhouCode
+.gitignore @zhouCode
+.github/ @zhouCode
+*.py @zhouCode
+*.xlsx @zhouCode
 
 # 教师文件夹
-teacher/ @teacher-username
+teacher/ @zhouCode
 
 # 23区块链01班学生文件夹权限
 # 注意：GitHub的CODEOWNERS不支持动态用户映射
