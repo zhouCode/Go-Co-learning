@@ -7,6 +7,8 @@
 欢迎使用区块链专业协作学习仓库！本手册将指导您完成从修改文件到提交代码的完整流程。
 
 #### 如果没有下载仓库代码
+先安装git[教程](https://zhuanlan.zhihu.com/p/443527549)
+
 下载仓库
 ```bash
 git clone https://github.com/zhouCode/Go-Co-learning.git
