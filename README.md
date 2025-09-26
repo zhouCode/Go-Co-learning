@@ -6,9 +6,17 @@
 
 欢迎使用区块链专业协作学习仓库！本手册将指导您完成从修改文件到提交代码的完整流程。
 
+#### 如果没有下载仓库代码
+下载仓库
+```bash
+git clone https://github.com/zhouCode/Go-Co-learning.git
+cd Go-Co-learning
+```
+
 #### 📝 完成笔记后的提交步骤
 
 **步骤1：拉取最新代码**
+
 ```bash
 # 【重要】开始工作前先拉取最新的远程代码
 git pull origin main
