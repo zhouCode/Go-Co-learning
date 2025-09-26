@@ -50,7 +50,7 @@ jobs:
           echo "检查文件: $file"
           
           # 检查是否修改了根目录的关键文件
-          if [[ "$file" =~ ^(README\.md|\.gitignore|CODEOWNERS|\.github/.*|create_.*\.py|studentInfo\.xlsx)$ ]]; then
+          if [[ "$file" =~ ^(README\.md|\.gitignore|\.github/.*)$ ]]; then
             echo "这是根目录关键文件: $file"
             
             # 检查是否是老师
