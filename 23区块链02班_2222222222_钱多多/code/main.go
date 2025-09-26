@@ -3,9 +3,7 @@ package main
 import "fmt"
 
 func main() {
-    fmt.Println("Hello, World!")
-    fmt.Println("欢迎 钱多多 学习Go语言!")
-    fmt.Println("这是你的第一个Go程序")
+  
     
     // 基本变量声明
     var name string = "梁勇"
