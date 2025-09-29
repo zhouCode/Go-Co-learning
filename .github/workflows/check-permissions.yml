@@ -1,0 +1,106 @@
+name: Check Student Folder Permissions
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  check-permissions:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    
+    - name: Get changed files
+      id: changed-files
+      uses: tj-actions/changed-files@v35
+      
+    - name: Check permissions
+      run: |
+        echo "检测到以下文件发生变更:"
+        echo "${{ steps.changed-files.outputs.all_changed_files }}"
+        
+        # 获取提交者信息（从PR或commit中）
+        if [ "${{ github.event_name }}" = "pull_request" ]; then
+          AUTHOR="${{ github.event.pull_request.user.login }}"
+          echo "PR作者: $AUTHOR"
+        else
+          AUTHOR="${{ github.actor }}"
+          echo "提交者: $AUTHOR"
+        fi
+        
+        # 读取学号到GitHub用户名的映射表
+        MAPPING_FILE=".github/student-mapping.json"
+        if [[ ! -f "$MAPPING_FILE" ]]; then
+          echo "❌ 错误: 找不到学生映射表文件 $MAPPING_FILE"
+          exit 1
+        fi
+        
+        echo "✅ 成功加载学生映射表"
+        
+        # 检查每个变更的文件
+        violation_found=false
+        
+        for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+          echo "检查文件: $file"
+          
+          # 检查是否修改了根目录的关键文件
+          if [[ "$file" =~ ^(README\.md|\.gitignore|\.github/.*)$ ]]; then
+            echo "这是根目录关键文件: $file"
+            
+            # 检查是否是老师
+            IS_TEACHER=$(jq -r --arg author "$AUTHOR" '.teachers | index($author) != null' "$MAPPING_FILE")
+            if [[ "$IS_TEACHER" != "true" ]]; then
+              echo "❌ 错误: 只有老师可以修改根目录文件。用户 $AUTHOR 无权限。"
+              violation_found=true
+            else
+              echo "✅ 老师 $AUTHOR 有权限修改根目录文件 $file"
+            fi
+            
+          # 检查学生文件夹
+          elif [[ "$file" =~ ^23区块链[0-9]+班_[0-9]+_[^/]+/ ]]; then
+            # 提取文件夹名称
+            folder_name=$(echo "$file" | cut -d'/' -f1)
+            echo "这是学生文件夹: $folder_name"
+            
+            # 提取学号
+            student_id=$(echo "$folder_name" | sed -n 's/^23区块链[0-9]\+班_\([0-9]\+\)_.*/\1/p')
+            echo "学号: $student_id"
+            
+            # 从映射表中获取对应的GitHub用户名
+            EXPECTED_USER=$(jq -r --arg id "$student_id" '.student_mapping[$id] // empty' "$MAPPING_FILE")
+            
+            if [[ -z "$EXPECTED_USER" ]]; then
+              echo "❌ 错误: 找不到学号 $student_id 对应的GitHub用户名"
+              violation_found=true
+              continue
+            fi
+            
+            # 检查是否是老师（老师可以修改任何文件）
+            IS_TEACHER=$(jq -r --arg author "$AUTHOR" '.teachers | index($author) != null' "$MAPPING_FILE")
+            
+            if [[ "$IS_TEACHER" == "true" ]]; then
+              echo "✅ 老师 $AUTHOR 有权限修改 $file"
+            elif [[ "$AUTHOR" != "$EXPECTED_USER" ]]; then
+              echo "❌ 错误: 用户 $AUTHOR 无权限修改文件夹 $folder_name (应为: $EXPECTED_USER)"
+              violation_found=true
+            else
+              echo "✅ 学生 $AUTHOR 有权限修改 $file"
+            fi
+            
+          else
+            echo "⚠️  警告: 文件 $file 不在已识别的模式中"
+          fi
+        done
+        
+        if [ "$violation_found" = true ]; then
+          echo "❌ 权限检查失败！发现违规操作。"
+          exit 1
+        else
+          echo "✅ 所有权限检查通过！"
+        fi
