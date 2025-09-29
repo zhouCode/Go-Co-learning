@@ -8,8 +8,16 @@
 ## 学习记录
 
 ### 课程笔记
-- 
+- 初次声明变量
+变量 := 初始值
+交换变量：b,a=a,b
+_代表匿名变量
 
+整型：int、uint(无符号整型)
+复数：complex
+
+打印导包import "fmt"
+        fmt.print("hello world")
 ### 作业记录
 - 
 
