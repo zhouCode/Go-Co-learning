@@ -1,1 +1,19 @@
-package main()
+
+package main
+
+import "fmt"
+
+func main() {
+	var a int = 10
+	var b = 10
+	c := 20
+	fmt.println(
+		"hello world:",a , b, c)
+}
+
+func main (){
+	const(
+		a= 0 =iotav //0
+		b = 1
+	)
+}
