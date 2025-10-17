@@ -1,14 +1,3 @@
-package main
-
-import "fmt"
-
-func main() {
-	var a int = 10
-	var b = 10
-	c := 20 //第一次赋值才能用
-	fmt.Println("hello world:", a, b, c)
-}
-
 //package main
 
 //import "fmt"
@@ -77,3 +66,20 @@ func main() {
 // 		fmt.Println("hello world")
 // 	}
 // }
+
+package main
+
+import "fmt"
+
+func main() {
+OuterLoop:
+	for i := 0; i < 3; i++ {
+		for j := 0; j < 3; j++ {
+			fmt.Printf("正在检查: i=%d, j=%d\n", i, j)
+			if i == 1 && j == 1 {
+				fmt.Println("找到了 跳出所有循环！")
+				break OuterLoop
+			}
+		}
+	}
+}
