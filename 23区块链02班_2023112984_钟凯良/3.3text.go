@@ -17,3 +17,4 @@ func main() {
 		fmt.Print("没有及格")
 	}
 }
+
