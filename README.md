@@ -15,93 +15,25 @@ git clone https://github.com/zhouCode/Go-Co-learning.git
 cd Go-Co-learning
 ```
 
-#### 📝 完成笔记后的提交步骤
+# 📝 每次写代码前需要拉取最新代码
 
-**步骤1：拉取最新代码**
+**拉取最新代码**
 
 ```bash
 # 【重要】开始工作前先拉取最新的远程代码
 git pull origin main
 ```
-
-**步骤2：保存笔记文件**
-- 在您的专属文件夹中编辑 `note.md` 文件
-- 使用 `Ctrl+S`（Windows）或 `Cmd+S`（Mac）保存文件
-- 确保文件内容已正确保存
-
-**步骤3：添加变更到Git**
-```bash
-# 添加您的笔记文件到Git暂存区
-git add 您的文件夹名/note.md
-
-# 或者添加整个文件夹的所有变更
-git add 您的文件夹名/
-```
-
-**步骤4：提交变更**
-```bash
-# 提交变更并添加描述信息
-git commit -m "更新学习笔记：添加第X章内容"
-```
-
-**步骤5：推送到远程仓库**
-```bash
-# 推送到GitHub远程仓库
-git push origin main
-```
-
-#### 💻 完成代码后的提交步骤
-
-![find your fold](images/1.png)
-**步骤1：拉取最新代码**
-```bash
-# 【重要】开始工作前先拉取最新的远程代码
-git pull origin main
-```
-
-**步骤2：保存代码文件**
-- 在您的 `code/` 文件夹中编辑代码文件
-- 确保代码能够正常运行（可以先本地测试）
-- 保存所有修改的文件
-
-**步骤3：添加代码变更**
-```bash
-# 添加代码文件到Git暂存区
-git add 您的文件夹名/code/
-
-# 或者添加特定的代码文件
-git add 您的文件夹名/code/main.go
-```
-
-
 
 #### 🔄 完整操作流程示例
 
 **场景：您刚完成了一次学习，需要更新笔记和代码**
-
-```bash
-# 1. 首先确认当前位置（应该在仓库根目录）
-pwd
-
-# 2. 【重要】拉取最新的远程代码（避免冲突）
-git pull origin main
-
-# 3. 查看当前文件状态
-git status
-
-# 4. 添加所有变更（推荐方式）
-git add 您的文件夹名/
-
-# 5. 查看即将提交的内容
-git status
-
-# 6. 提交变更
-git commit -m "学习记录更新：完成第3章区块链基础知识学习和Go语言练习"
-
-# 7. 推送到远程仓库
-git push origin main
-```
-
+![1](images/1.png)
+![2](images/2.png)
+![3](images/3.png)
+![4](images/4.png)
+![5](images/5.png)
+![6](images/6.png)
+![7](images/7.png)
 #### ⚠️ 重要注意事项
 
 **文件操作注意事项：**
@@ -110,75 +42,6 @@ git push origin main
 - ❌ 不要修改其他同学的文件夹
 - ❌ 不要修改根目录的配置文件
 
-**Git命令注意事项：**
-- **🔥 重要：每次开始工作前先执行 `git pull origin main` 避免冲突**
-- 提交信息要清晰明了，描述您做了什么
-- 每次学习后及时提交，不要积累太多变更
-- 如果遇到冲突，请联系老师协助解决
-- 推送前可以用 `git status` 检查状态
-
-**常用Git命令速查：**
-```bash
-git status          # 查看文件状态
-git add .           # 添加当前目录所有变更
-git commit -m "..."  # 提交变更
-git push origin main # 推送到远程仓库
-git pull origin main # 拉取远程更新
-git log --oneline   # 查看提交历史
-```
-
-**遇到问题时：**
-1. 先检查文件是否正确保存
-2. 使用 `git status` 查看当前状态
-3. 确认您在正确的目录下操作
-4. 如有疑问，及时联系老师或同学
-
-## 🔧 故障排除和常见问题
-
-### 常见Git错误及解决方案
-
-**问题1：推送时提示权限被拒绝**
-```
-ERROR: Permission denied (publickey)
-```
-**解决方案：**
-- 检查是否已正确配置SSH密钥
-- 确认GitHub用户名在映射表中正确配置
-- 联系教师确认仓库访问权限
-
-**问题2：推送时出现合并冲突**
-```
-error: failed to push some refs to 'origin'
-hint: Updates were rejected because the remote contains work that you do not have locally
-```
-**解决方案：**
-```bash
-# 先拉取远程更新
-git pull origin main
-
-# 如果有冲突，手动解决冲突后再推送
-git add .
-git commit -m "解决合并冲突"
-git push origin main
-```
-
-**问题3：提交时提示"nothing to commit"**
-```
-nothing to commit, working tree clean
-```
-**解决方案：**
-- 确认文件已保存（Ctrl+S）
-- 检查是否在正确的文件夹中修改了文件
-- 使用 `git status` 查看文件状态
-
-**问题4：GitHub Actions检查失败**
-```
-Permission check failed: You can only modify files in your own folder
-```
-**解决方案：**
-- 确认只修改了自己的文件夹
-- 检查文件路径是否正确
-- 确认GitHub用户名与学号映射正确
 
 ### Git自动拉取配置
 
@@ -302,124 +165,6 @@ Co-learning-repo/
 - 2023115219_殷毓
 - 2023115246_梁勇
 
-## 🔒 权限管理
-
-### 学号到GitHub用户名映射
-
-本仓库使用映射表来管理学生权限，映射表位于 `.github/student-mapping.json`。
-
-**映射表结构：**
-```json
-{
-  "student_mapping": {
-    "学号": "GitHub用户名",
-    "2023111423": "student-github-username"
-  },
-  "teachers": [
-    "teacher-github-username"
-  ]
-}
-```
-
-**配置步骤：**
-1. 教师需要收集所有学生的GitHub用户名
-2. 更新 `.github/student-mapping.json` 文件中的映射关系
-3. 将占位符用户名替换为实际的GitHub用户名
-
-### 🛡️ 权限检查系统
-
-本仓库配置了自动化的权限检查系统，通过GitHub Actions工作流确保学生只能修改自己的文件夹。
-
-#### 系统工作原理
-
-**检查流程：**
-1. **触发条件**：每次push到main分支时自动触发
-2. **身份验证**：根据提交者的GitHub用户名查找对应的学号
-3. **权限验证**：检查修改的文件是否属于该学生的文件夹
-4. **结果处理**：
-   - ✅ **通过**：学生只修改了自己的文件夹，允许提交
-   - ❌ **拒绝**：学生修改了其他文件夹，阻止提交并显示错误信息
-
-**权限规则：**
-- **学生权限**：只能修改格式为 `23区块链XX班_自己学号_自己姓名/` 的文件夹
-- **教师权限**：可以修改任何文件（在映射表的 `teachers` 列表中的用户）
-- **严格模式**：任何违规操作都会导致提交失败
-
-#### 配置文件说明
-
-**权限检查工作流**：`.github/workflows/check-permissions.yml`
-- 自动检查每次提交的文件修改权限
-- 基于学号到GitHub用户名的映射表进行身份验证
-- 提供详细的错误信息和修复建议
-
-**学生映射表**：`.github/student-mapping.json`
-- 维护学号到GitHub用户名的对应关系
-- 包含教师GitHub用户名列表
-- 支持动态添加新学生
-
-#### 权限检查系统配置过程
-
-**1. 初始配置**
-```bash
-# 1. 创建映射表文件
-# 编辑 .github/student-mapping.json，添加学生信息
-
-# 2. 配置GitHub Actions工作流
-# .github/workflows/check-permissions.yml 已预配置
-
-# 3. 设置仓库权限
-# 将学生添加为协作者（Write权限）
-```
-
-**2. 添加新学生**
-```json
-{
-  "student_mapping": {
-    "新学生学号": "新学生GitHub用户名"
-  }
-}
-```
-
-**3. 权限验证测试**
-```bash
-# 学生测试：尝试修改自己的文件夹
-git add 自己的文件夹/
-git commit -m "测试权限"
-git push origin main  # 应该成功
-
-# 权限违规测试：尝试修改其他文件夹
-git add 其他同学文件夹/
-git commit -m "测试违规"
-git push origin main  # 应该失败并显示错误信息
-```
-
-#### 常见权限问题及解决方案
-
-**问题1：权限检查失败**
-```
-❌ 错误: 用户 username 无权限修改文件夹 23区块链XX班_XXXXXXXX_XXX (应为: expected_user)
-```
-**解决方案：**
-- 检查GitHub用户名是否在映射表中正确配置
-- 确认只修改了自己的文件夹
-- 联系教师更新映射表
-
-**问题2：映射表配置错误**
-```
-⚠️ 警告: 在映射表中未找到用户 username 对应的学号
-```
-**解决方案：**
-- 教师需要在 `.github/student-mapping.json` 中添加该用户的映射关系
-- 确认GitHub用户名拼写正确
-
-**问题3：工作流执行失败**
-```
-Error: Process completed with exit code 1
-```
-**解决方案：**
-- 查看GitHub Actions日志获取详细错误信息
-- 检查是否修改了不属于自己的文件
-- 确认映射表格式正确
 
 #### 权限系统维护
 
@@ -437,17 +182,13 @@ Error: Process completed with exit code 1
 
 ### 学生权限
 - ✅ **可以做的事情：**
-  - 直接push到主分支（受权限系统保护）
   - 修改自己文件夹内的所有文件（基于映射表验证）
   - 在自己的 `note.md` 中记录学习笔记
   - 在自己的 `code/` 文件夹中编写和修改代码
-  - 提交和推送代码更改
 
 - ❌ **不能做的事情：**
   - 修改其他同学的文件夹
   - 修改根目录的配置文件（README.md、.gitignore等）
-  - 修改GitHub Actions工作流
-  - 修改学生映射表
 
 ### 教师权限
 - 拥有仓库的完全管理权限
@@ -455,44 +196,6 @@ Error: Process completed with exit code 1
 - 可以修改仓库配置和权限设置
 - 可以更新学生映射表
 
-## 🚀 使用指南
-
-### 🚀 学生使用流程
-
-1. **克隆仓库**
-   ```bash
-   git clone https://github.com/zhouCode/Go-Co-learning.git
-   cd Go-Co-learning
-   ```
-
-2. **找到自己的文件夹**
-   - 文件夹格式：`23区块链XX班_你的学号_你的姓名`
-
-3. **开始学习前的准备**
-   ```bash
-   # 【重要】每次开始工作前先拉取最新代码
-   git pull origin main
-   ```
-
-4. **编辑和学习**
-   - 修改 `note.md` 记录学习笔记
-   - 在 `code/` 文件夹中编写代码
-
-5. **提交更改**
-   ```bash
-   # 添加变更
-   git add 您的文件夹名/
-   
-   # 提交变更
-   git commit -m "更新学习笔记和代码"
-   
-   # 推送到远程仓库
-   git push origin main
-   ```
-
-**注意**：由于有GitHub Actions权限检查，学生可以直接push到主分支，系统会自动验证权限，只允许修改自己的文件夹。
-
-> 💡 **提示**：详细的操作步骤请参考文档开头的 [📖 学生操作手册](#-学生操作手册) 部分。
 
 ## 📝 学习笔记模板
 
@@ -538,63 +241,6 @@ cd 你的文件夹名/code/
 go run main.go
 ```
 
-## 🛡️ 安全规则
-
-1. **文件夹隔离**：每个学生只能修改自己的文件夹
-2. **权限验证**：GitHub Actions自动检查文件修改权限
-3. **实时保护**：每次push都会触发权限检查
-4. **映射表验证**：基于学号到GitHub用户名的映射表进行身份验证
-5. **教师监督**：教师可以查看所有提交历史和修改记录
-
-## 🔧 仓库设置
-
-### 教师初始设置步骤
-
-1. **创建GitHub仓库**
-   ```bash
-   # 在GitHub上创建新仓库，然后推送本地代码
-   git remote add origin https://github.com/your-username/co-learning-repo.git
-   git push -u origin main
-   ```
-
-2. **配置学生映射表**
-   - 收集所有学生的GitHub用户名
-   - 编辑 `.github/student-mapping.json` 文件
-   - 将占位符替换为实际用户名：
-   ```json
-   {
-     "student_mapping": {
-       "2023111423": "actual-github-username",
-       "2023110571": "another-github-username"
-     },
-     "teachers": [
-       "teacher-actual-username"
-     ]
-   }
-   ```
-
-3. **设置仓库权限**
-   - 将学生添加为仓库协作者（Write权限）
-   - 启用GitHub Actions进行权限检查
-   - 可选：设置分支保护规则（如需要额外安全层）
-
-4. **邀请学生**
-   - 将学生添加为仓库协作者
-   - 确保学生GitHub用户名与映射表一致
-
-### 学生初始设置步骤
-
-1. **接受仓库邀请**
-2. **克隆仓库**
-   ```bash
-   git clone https://github.com/zhouCode/Go-Co-learning.git
-   ```
-3. **确认自己的文件夹**
-   - 找到格式为 `23区块链XX班_你的学号_你的姓名` 的文件夹
-4. **开始学习和直接提交**
-   - 修改文件后可以直接push到main分支
-   - 系统会自动验证权限，确保只能修改自己的文件夹
-
 ## 📞 联系方式
 
 如有问题，请联系：
@@ -602,7 +248,6 @@ go run main.go
 - **课程群**: [请填写实际的课程群信息]
 - **GitHub Issues**: 可以在本仓库创建Issue反馈问题
 
-> 💡 **提示**：建议教师在部署时更新上述联系方式为实际的联系信息。
 
 ## 📄 许可证
 
