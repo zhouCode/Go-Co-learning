@@ -67,19 +67,75 @@
 // 	}
 // }
 
-package main
+// package main
 
-import "fmt"
+// import "fmt"
 
-func main() {
-OuterLoop:
-	for i := 0; i < 3; i++ {
-		for j := 0; j < 3; j++ {
-			fmt.Printf("正在检查: i=%d, j=%d\n", i, j)
-			if i == 1 && j == 1 {
-				fmt.Println("找到了 跳出所有循环！")
-				break OuterLoop
-			}
-		}
-	}
-}
+// func main() {
+// OuterLoop:
+// 	for i := 0; i < 3; i++ {
+// 		for j := 0; j < 3; j++ {
+// 			fmt.Printf("正在检查: i=%d, j=%d\n", i, j)
+// 			if i == 1 && j == 1 {
+// 				fmt.Println("找到了 跳出所有循环！")
+// 				break OuterLoop
+// 			}
+// 		}
+// 	}
+// }
+
+// package main
+
+// import "fmt"
+
+// func main() {
+// 	multiply := func(a,b int) int {//multiply是一个函数变量，他的类型是func(int,int) int
+// 		return a*b
+// 	}
+// 	fmt.Println("匿名函数相乘：",multiply(2,3))
+
+// 	//定义并立即执行
+// 	//最后的（5,3）是在调用它
+// 	result := func(a,b int) int {//result是int类型
+// 		return a*b
+// 	}(5,3)
+// 	fmt.Println("立即执行结果：",result)
+// }
+
+
+// package main
+// import "fmt"
+
+// func intSequence() func() int {
+// 	i :=0
+// 	return func() int {
+// 		i++
+// 		return i
+// 	}
+// }
+// func main() {
+// 	nextInt := intSequence()
+// 	fmt.Println(nextInt())
+// 	fmt.Println(nextInt())
+// 	fmt.Println(nextInt())
+
+// 	newInts := intSequence()
+// 	fmt.Println(newInts())
+// 	fmt.Println(newInts())
+// 	fmt.Println(nextInt())
+
+// }
+
+
+// package main
+// import "fmt"
+
+// func main(){
+// 	a := 10
+// 	var ip *int = &a
+// 	fmt.Println("a 现有指向变量是:%x\n",&a)
+// 	fmt.Println("ip 现有指向变量的值是:%v\n",*ip)
+// 	//1,对于一个变量，想获取他的地址，就使用&[变量名]
+// 	//2,对于一个指针变量，想获取他指向的变量，就使用*[指针变量名]
+// 	//3,声明一个指针变量，使用*[类型]
+// }
