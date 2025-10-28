@@ -20,8 +20,14 @@ cd Go-Co-learning
 **拉取最新代码**
 
 ```bash
-# 【重要】开始工作前先拉取最新的远程代码
-git pull origin main
+# 将修改暂时存储起来
+git stash
+
+# 执行变基拉取
+git pull --rebase
+
+# 拉取完成后，恢复你的修改
+git stash pop
 ```
 
 #### 🔄 完整操作流程示例
