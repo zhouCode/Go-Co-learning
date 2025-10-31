@@ -139,3 +139,64 @@
 // 	//2,对于一个指针变量，想获取他指向的变量，就使用*[指针变量名]
 // 	//3,声明一个指针变量，使用*[类型]
 // }
+//第五章:数组
+// package main
+//  import "fmt"
+
+//  func main() {
+// 	var arr1 [3]int
+// 	arr1[0] =100
+// 	fmt.Printf("值：%v,类型：%T\n",arr1,arr1)
+// 	arr2 := [...]int{10,20,30,40}
+// 	fmt.Printf("值：%v,类型：%T\n",arr2,arr2)
+//  }
+
+//  package main
+//  import "fmt"
+
+//  func main() {
+// 	a :=[...]string{"USE","CHINA","JAPAN"}
+// 	b :=a
+// 	fmt.Println("修改前:")
+// 	fmt.Println("a:",a)
+// 	fmt.Println("b",b)
+// 	b[0] = "Singapore"
+// 	fmt.Println("修改后:")
+// 	fmt.Println("a:",a)
+// 	fmt.Println("b",b)
+//  }
+
+//   package main
+//  import "fmt"
+
+//  func main() {
+// 	s := make([] string,3,5)
+// 	parent := [...]int{10,20,30,40,50}
+// 	child := parent[1:4]
+// 	fmt.Println("Slice:",s)
+// 	fmt.Println("len:",len(s))
+// 	fmt.Println("Cap:", cap(s))
+// 	fmt.Println("child:",child)
+// 	child[0] = 99
+// 	fmt.Println("After modify child,Parent",parent)
+// }
+
+//   package main
+//  import "fmt"
+
+//  func main() {
+// 	s :=make([]int,1,1)
+// 	s = append(s,10)
+// 	fmt.Printf("s: %v, len: %d, cap: %d\n", s, len(s), cap(s))
+// 	s = append(s,20)
+// 	fmt.Printf("s: %v, len: %d, cap: %d\n",s,len(s),cap(s))
+// 	s = append(s,30)
+// 	fmt.Printf("s: %v, len: %d, cap: %d\n",s,len(s),cap(s))
+// 	s = append(s,40)
+// 	fmt.Printf("s: %v, len: %d, cap: %d\n",s,len(s),cap(s))
+// 	fmt.Printf("=======appendSlice 结束 =======\n")
+// 	}
+
+
+
+
