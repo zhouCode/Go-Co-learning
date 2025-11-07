@@ -197,6 +197,72 @@
 // 	fmt.Printf("=======appendSlice 结束 =======\n")
 // 	}
 
+//第六章
+//  package main
+//  import "fmt"
+
+//  func main() {
+// 	s :="我爱go语言"
+// 	for _,value  := range s {
+// 		fmt.Printf("%c",value)
+// 	}
+// 	fmt.Println()
+// 	fmt.Printf("%d",len(s))
+// 	for i,ch := range []byte(s){
+// 		fmt.Printf("%d:%x",i,ch)
+// 	}
+// 	fmt.Println()
+// }
+
+
+// package main
+
+// import (
+// 	"fmt"
+// 	"strconv"
+// )
+
+//  func main() {
+// 	fmt.Println(strconv.ParseInt("123",10,64))
+// 	fmt.Println(strconv.ParseInt("0",10,64))
+// 	fmt.Println(strconv.ParseInt("123x",10,64))
+
+// 	fmt.Printf("%T \n",strconv.FormatInt(123,10))
+// 	fmt.Println("%T",strconv.FormatInt(0,10))
+// }
+
+
+// package main
+
+// import (
+// 	"fmt"
+// 	"time"
+// )
+
+//  func main() {
+// 	t, _ := time.Parse("2006-01-02 15:04:05","2023-08-01 12:34:56")
+// 	fmt.Println("解析时间： ",t)
+// 	now :=time.Now()
+// 	fmt.Println("当前时间:", now.Format("2006/01/02 15:04:05"))
+// 	fmt.Println("24小时后的时间: ",now.Add(24*time.Hour))
+// 	fmt.Println("时间差: ", now.Sub(t))
+// 	fmt.Println("解析时间是否在当前时间之前: ",t.Before(now))
+// 	fmt.Println("解析时间是否在当前时间之后: ",t.After(now))
+// }
+
+// package main
+// import (
+// 	"fmt"
+// 	"math/rand"
+// 	"time"
+// )
+// func main(){
+// 	seed := rand.NewSource(time.Now().UnixNano())
+// 	r1 := rand.New(seed)
+// 	fmt.Println("随机数:", rand.Intn(100))
+// 	fmt.Println("随机数:",r1.Intn(100))
+// 	fmt.Println("随机浮点数: ",r1.Float64())
+// }
 
 
 
