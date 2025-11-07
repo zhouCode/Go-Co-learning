@@ -214,6 +214,92 @@ len长度到达一定数量时，会自动扩容，扩容后的容量是原来�
 - map的value可以是任意类型
 - map的key-value对是无序的
 - map中key必须是唯一的
+
+- |---------第六章 --------|
+string: 字符串
+range遍历:
+....
+len(str):字符串的长度，中文占3个字节，英文占1个字节
+Contains:判断字符串是否包含指定的子字符串
+func Contains(str, substr string) bool
+substr:子字符串
+    返回值：如果str包含substr，则返回true，否则返回false
+分割字符串：
+Split:将字符串按照指定的分隔符进行分割，返回一个字符串切片
+func Split(str, sep string) []string
+sep:分隔符
+    返回值：一个字符串切片，包含分割后的子字符串
+ToLower:将字符串中的所有字符转换为小写
+ToUpper:将字符串中所有字符转换为大写
+TrimSpace:修剪字符串首尾的空格
+- strconv包中常用函数：
+ParseInt:将字符串转换为整数
+func ParseInt(s string, base int, bitSize int) (i int64, err error)
+s:要转换的字符串
+base:进制数，2<=base<=36
+bitSize:结果的位大小，0表示根据字符串的内容自动选择位大小
+    返回值：转换后的整数和错误信息
+regexp:正则表达式
+- 邮箱验证正则表达式示例
+```go
+package main
+
+import (
+    "fmt"
+    "regexp"
+)
+
+func main() {
+    // 邮箱正则表达式模式
+    emailRegex := `^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`
+    
+    // 测试邮箱地址
+    testEmails := []string{
+        "chengmm2023@example.com",      // ✅ 有效
+        "student_123@university.edu", // ✅ 有效
+        "test.email+tag@domain.co",   // ✅ 有效
+        "invalid.email@",             // ❌ 无效
+        "@invalid.com",                // ❌ 无效
+        "noatsign.com",                // ❌ 无效
+        "spaces in@email.com",         // ❌ 无效
+    }
+    
+    // 编译正则表达式
+    re := regexp.MustCompile(emailRegex)
+    
+    fmt.Println("📧 邮箱验证测试:")
+    for _, email := range testEmails {
+        if re.MatchString(email) {
+            fmt.Printf("✅ 有效邮箱: %s\n", email)
+        } else {
+            fmt.Printf("❌ 无效邮箱: %s\n", email)
+        }
+    }
+    
+    // 提取文本中的邮箱
+    text := "我的邮箱是 chengmm@example.com，备用邮箱是 backup123@domain.org.cn"
+    emailPattern := `[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}`
+    re2 := regexp.MustCompile(emailPattern)
+    emails := re2.FindAllString(text, -1)
+    fmt.Printf("\n从文本提取的邮箱: %v\n", emails)
+}
+```
+
+- 正则表达式语法说明：
+  - `^` 匹配字符串开始
+  - `[a-zA-Z0-9._%+-]+` 匹配用户名部分（允许字母、数字、点、下划线、百分号、加号、减号）
+  - `@` 匹配@符号
+  - `[a-zA-Z0-9.-]+` 匹配域名部分
+  - `\.` 匹配点号（需要转义）
+  - `[a-zA-Z]{2,}` 匹配顶级域名（至少2个字母）
+  - `$` 匹配字符串结束
+
+ Round:四舍五入到最近的整数
+ max：最大
+ min：最小
+ math:绝对值
+ Pow:平方根   
+randNum := rand.Intn(100)//生成0到99的随机数    
 ### 作业记录
 - 完成区块链基础概念学习
 - 实现简单的智能合约示例
@@ -227,5 +313,6 @@ len长度到达一定数量时，会自动扩容，扩容后的容量是原来�
 
 ---
 *创建时间: 2025-09-25 08:57:45*
+
 
 
