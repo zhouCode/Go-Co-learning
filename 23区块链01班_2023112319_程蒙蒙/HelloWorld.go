@@ -264,5 +264,58 @@
 // 	fmt.Println("随机浮点数: ",r1.Float64())
 // }
 
+//|-------------------第七章----------------|
+// package main
+
+// import "fmt" 
+//func main(){
+	// var t1 Teacher 
+	// fmt.Println(t1)
+	// fmt.Printf("t1:%T , %v,%q \n",t1,t1,t1)
+	// t1.name = "Steven"
+	// t1.age = 35
+	// t1.sex = 1
+	// fmt.Println(t1)
+	// fmt.Println("--------------")
+
+
+
+	// t3 :=Teacher{
+	// 	name:"Josh",
+	// 	age:28,
+	// 	sex:1,
+	// }
+	// t3 = Teacher{name:"Josh2",age:27,sex:1}
+
+
+	// t4 := Teacher{"Ruby",30,0}
+	// fmt.Println(t4)
+	// fmt.Println("-------------------")
+
+	// emp1 :=new(Emp)
+	// fmt.Printf("emp1:%T,%v, %p\n",emp1,emp1,emp1)
+	// (*emp1).name = "David"
+	// (*emp1).age = 30
+	// (*emp1).sex = 1
+	// //语法糖化法
+	// emp1.name = "David"
+	// emp1.age = 30
+	// emp1.sex = 1
+//}
+
+
+// func main(){
+// 	emp1 :=Employee{"Daniel","$",2000}
+// 	emp1.printSalary()
+// 	printSalary(emp1)
+	
+// }
+
+// func (e Employee) printSalary() {
+// 	fmt.Printf("员工姓名：%s,薪资：%s%.2f \n",e.name,e.currency,e.salary)
+// }
+// func printSalary(e Eployee ) {
+// 	fmt.Printf("员工姓名：%s,薪资：%s%.2f \n",e.name,e.currency,e.salary)
+// }
 
 
