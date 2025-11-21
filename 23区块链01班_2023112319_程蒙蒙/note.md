@@ -327,6 +327,43 @@ func 函数名（参数列表） （返回值类型） {
     //函数体
     return 返回值
 }
+
+
+
+|-------------第8章------------------|
+error接口：
+type error interface {
+    Error() string
+}error本质上是一个接口类型
+
+error常用返回值来表示错误，通常是返回值的最后一个参数
+自定义error：实现error方法
+type MyError struct {
+    Msg string
+}
+func (e *MyError) Error() string {
+    return e.Msg
+}
+
+errors.New:创建一个新的错误
+func New(text string) error
+text:错误信息
+    返回值：一个error接口类型的错误
+
+fmt.Errorf:格式化错误信息(直接返回一个错误类型并输出具体参数)
+func Errorf(format string, a ...any) error
+format:格式化字符串
+a:格式化参数
+    返回值：一个error接口类型的错误
+
+defer:延迟一个函数或方法的执行
+特性：
+    1. 延迟的函数或方法会在包含它们的函数或方法返回之前执行
+    2. 多个defer语句会按照后进先出（LIFO）的顺序执行
+    3. 延迟的函数或方法可以访问包含它们的函数或方法的参数和局部变量
+
+
+
 ### 作业记录
 - 完成区块链基础概念学习
 - 实现简单的智能合约示例
@@ -340,6 +377,7 @@ func 函数名（参数列表） （返回值类型） {
 
 ---
 *创建时间: 2025-09-25 08:57:45*
+
 
 
 
