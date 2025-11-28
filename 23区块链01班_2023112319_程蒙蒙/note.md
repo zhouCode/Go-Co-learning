@@ -390,7 +390,18 @@ ch2 := make(chan any)
 使用channel发送数据
 语法：channel 变量 <- 值
 
+data , ok := <-channel变量
+    如果channel变量中没有数据，ok为false
+    如果channel变量中没有数据，ok为true
+OK：channel是否被关闭
 
+可以从关闭的channel中读取数据
+time：
+Time包
+time.Now()：返回当前时间
+time.Sleep()暂停执行指定时间
+    参数：时间 duration
+    返回值：无
 ### 作业记录
 - 完成区块链基础概念学习
 - 实现简单的智能合约示例
@@ -404,6 +415,7 @@ ch2 := make(chan any)
 
 ---
 *创建时间: 2025-09-25 08:57:45*
+
 
 
 
