@@ -14,6 +14,7 @@
 6，内置函数，检索，数组的遍历，strconv包中常用函数，正则表达式，time包中常用函数
 7，go语言面向对象编程（结构体，方法，接口，继承，多态）
 8，go语言中的并发编程（goroutine，channel，select，sync包）
+9，哈希算法，对称加密算法，非对称加密算法
 ### 课程笔记 
 变量多重赋值：
 ```go
@@ -329,15 +330,35 @@ Goroutine：
 - Goroutine的创建和销毁成本非常低，一个程序可以创建成千上万个Goroutine。
 - Goroutine之间的通信主要通过通道（channel）来实现。
 - Goroutine可以在不同的CPU核心上并行执行，充分利用多核处理器的性能。
+
+
 channel：
 - channel是Go语言中的一种通信机制，用于在Goroutine之间传递数据。
 - channel可以是有缓冲的或无缓冲的。
 - 有缓冲的channel可以在发送端阻塞，直到接收端准备好接收数据；无缓冲的channel必须在发送端和接收端都准备好时才能进行通信。
 - channel可以用于实现Goroutine之间的同步和通信。
+
 time包中与channel相关的函数：
 - time.After()：返回一个在指定时间后发送当前时间的通道
 - time.Tick()：返回一个在指定时间间隔内发送当前时间的通道
 - time.Sleep()：暂停当前Goroutine的执行指定的时间
+
+
+sync包：
+- sync包提供了同步原语，用于在Goroutine之间协调和同步操作。
+- sync包主要包含以下几个类型：
+  - sync.Mutex：互斥锁，用于保护共享资源的访问。
+  - sync.RWMutex：读写互斥锁，用于保护共享资源的读取和写入操作。
+  - sync.WaitGroup：等待组，用于等待多个Goroutine完成。
+  - sync.Once：_once类型，用于确保某个操作只执行一次。
+
+sync条件变量：
+- sync.Cond是Go语言中的条件变量类型，用于在Goroutine之间进行协调和同步。
+- sync.Cond主要包含以下几个方法：
+  - Wait()：使当前Goroutine等待，直到被其他Goroutine调用Signal()或Broadcast()方法唤醒。
+  - Signal()：唤醒一个等待的Goroutine。
+  - Broadcast()：唤醒所有等待的Goroutine。
+
 
 ### 作业记录
 
