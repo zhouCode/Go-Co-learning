@@ -402,6 +402,59 @@ time.Now()：返回当前时间
 time.Sleep()暂停执行指定时间
     参数：时间 duration
     返回值：无
+
+
+After()函数：
+    功能：返回一个时间通道，在指定时间后发送当前时间
+    参数：时间 duration
+    返回值：一个时间通道
+
+select语句：
+    select分支语句：
+        ase 通道变量 <- 值：
+            当通道变量可以发送数据时，执行该分支
+        case 值 := <- 通道变量：
+            当通道变量可以接收数据时，执行该分支
+        default：//不需要等待
+            当所有通道变量都不能发送或接收数据时，执行该分支
+sync包
+WaitGroup：等待一组 goroutine 完成
+    方法：
+        Add(delta int)：添加 delta 个 goroutine 到 WaitGroup 中
+        Done()：当前 goroutine 完成，将 WaitGroup 中的计数器减一
+        Wait()：阻塞当前 goroutine，直到 WaitGroup 中的计数器为零
+        
+    func (wg *WaitGroup) Add(delta int)
+        delta:要添加的 goroutine 数量
+        注意：delta 可以是负数，用于减少 goroutine 数量
+互斥锁：Mutex
+    方法：
+        Lock()：加锁
+        Unlock()：解锁
+        e.g.多个售票窗口同时售票，每个窗口售票时间不同，需要互斥锁来防止多个窗口同时售票
+    注意：
+        1. 互斥锁只能在一个 goroutine 中加锁，其他 goroutine 必须等待解锁后才能加锁
+        2. 互斥锁加锁后，其他 goroutine 必须等待解锁后才能加锁，否则会导致死锁
+读写锁：RWMutex
+    方法：
+        Lock()：加写锁
+        Unlock()：解锁写锁
+        RLock()：加读锁
+        RUnlock()：解锁读锁
+    注意：
+        1. 读写锁可以同时多个 goroutine 加读锁，但是只能有一个 goroutine 加写锁
+        2. 读写锁加写锁后，其他 goroutine 必须等待解锁后才能加锁，否则会导致死锁
+        3.写操作是互斥的，读和写是互斥的，读和读不互斥
+条件变量：Cond
+    方法：
+        Wait()：阻塞当前 goroutine，直到条件变量满足
+        Signal()：唤醒一个等待的 goroutine
+        Broadcast()：唤醒所有等待的 goroutine
+    注意：
+        1. 条件变量必须与互斥锁配合使用
+        2. 条件变量的 Wait() 方法会自动解锁互斥锁，在返回前会重新加锁互斥锁
+
+    
 ### 作业记录
 - 完成区块链基础概念学习
 - 实现简单的智能合约示例
@@ -415,6 +468,7 @@ time.Sleep()暂停执行指定时间
 
 ---
 *创建时间: 2025-09-25 08:57:45*
+
 
 
 
