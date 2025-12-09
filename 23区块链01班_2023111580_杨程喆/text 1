@@ -1,0 +1,53 @@
+package main
+import "fmt"
+/*
+
+func checkOddEven （n int） （bool, string）｛
+if n%2 ==0｛
+   return true， ”偶数”
+} else {
+   return false， ”奇数〞
+  } 
+} 
+
+
+/*
+Func counter （ func（ int｛
+
+   i：=0
+return func（ int｛
+  i++
+return i
+ } 
+} 
+
+*/
+func fibonacci （） func（） int｛
+  a, b：=0,1
+ return func() int｛
+   ret := a
+  a, b=b,atb
+   return ret
+ } 
+} 
+
+func main ()｛
+  fmt.Println（“--- 任务一：奇偶性判断—--”）
+    isEvenl, labell := checkOddEven (4)
+  fmt. Printf（“数字4：是偶数吗？%v，标签：%s\n”，isEvenl,label1）
+    isEven2, label2:= check0ddEven(7)
+  fmt. Printf（”数字7：是偶数吗？%v，标签：%s\n"，isEven2, label2）
+  fmt. Println（“\n--- 任务二：计数器—--^）
+     c1 := counter ( fmt. Println(c10) 
+  fmt. Println(c1()) 
+  fmt. Println(c1()) 
+  fmt. Println（“— 独立的计数器—--”）
+    c2 ：= counter（）
+  fmt. PrintIn(c2())
+  fmt. Println（C1()） 
+  fmt.Println（“n--- 任务三：斐波那契数列—--”）
+    f:= fibonacci ()
+  fmt.Println（“斐波那契数列前10项：“）
+    for i：=0:  i<10;  i++｛
+  fmt. Print (f(), " ")
+  fmt. Println ()
