@@ -4,11 +4,11 @@ import "fmt"
 
 func main() {
     fmt.Println("Hello, World!")
-    fmt.Println("欢迎 温思涵 学习Go语言!")
+    fmt.Println("欢迎 唐梦琴 学习Go语言!")
     fmt.Println("这是你的第一个Go程序")
     
     // 基本变量声明
-    var name string = "温思涵"
+    var name string = "唐梦琴"
     var age int = 20
     
     fmt.Printf("学生姓名: %s\n", name)
