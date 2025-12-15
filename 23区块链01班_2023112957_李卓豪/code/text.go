@@ -32,17 +32,15 @@ import "fmt"
     fmt.Println("这是你的第一个Go程序")
 
     // 基本变量声明
-    var name string = "程蒙蒙"
+    var name string = "李卓豪"
     var age int = 20
 
     fmt.Printf("学生姓名: %s\n", name)
     fmt.Printf("年龄: %d\n", age)
 
-    // 简单的函数调用
     greet(name)
 }
 
- // 问候函数
  func greet(name string) {
     fmt.Printf("你好, %s! 欢迎来到Go语言的世界!\n", name)
 }
@@ -89,12 +87,12 @@ OuterLoop:
  import "fmt"
 
  func main() {
-	multiply := func(a,b int) int {//multiply是一个函数变量，他的类型是func(int,int) int
+	multiply := func(a,b int) int {
 		return a*b
 	}
 	fmt.Println("匿名函数相乘：",multiply(2,3))
 
-	result := func(a,b int) int {//result是int类型
+	result := func(a,b int) int {
 		return a*b
 	}(5,3)
 	fmt.Println("立即执行结果：",result)
