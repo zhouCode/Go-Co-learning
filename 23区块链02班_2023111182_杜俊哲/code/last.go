@@ -1,0 +1,254 @@
+package main
+
+ import "fmt"
+
+ func main() {
+	multiply := func(a,b int) int {
+		return a*b
+	}
+	fmt.Println("匿名函数相乘：",multiply(2,3))
+
+	result := func(a,b int) int {
+		return a*b
+	}(5,3)
+	fmt.Println("立即执行结果：",result)
+}
+
+
+ package main
+ import "fmt"
+
+ func intSequence() func() int {
+	i :=0
+	return func() int {
+		i++
+		return i
+	}
+}
+ func main() {
+	nextInt := intSequence()
+	fmt.Println(nextInt())
+	fmt.Println(nextInt())
+	fmt.Println(nextInt())
+
+	newInts := intSequence()
+	fmt.Println(newInts())
+	fmt.Println(newInts())
+	fmt.Println(nextInt())
+
+}
+
+
+ package main
+ import "fmt"
+
+ func main(){
+	a := 10
+	var ip *int = &a
+	fmt.Println("a 现有指向变量是:%x\n",&a)
+	fmt.Println("ip 现有指向变量的值是:%v\n",*ip)
+}
+
+//第五章:数组
+ package main
+ import "fmt"
+
+ func main() {
+	var arr1 [3]int
+	arr1[0] =100
+	fmt.Printf("值：%v,类型：%T\n",arr1,arr1)
+	arr2 := [...]int{10,20,30,40}
+	fmt.Printf("值：%v,类型：%T\n",arr2,arr2)
+ }
+
+ package main
+ import "fmt"
+
+ func main() {
+	a :=[...]string{"USE","CHINA","JAPAN"}
+	b :=a
+	fmt.Println("修改前:")
+	fmt.Println("a:",a)
+	fmt.Println("b",b)
+	b[0] = "Singapore"
+	fmt.Println("修改后:")
+	fmt.Println("a:",a)
+	fmt.Println("b",b)
+ }
+
+   package main
+ import "fmt"
+
+ func main() {
+	s := make([] string,3,5)
+	parent := [...]int{10,20,30,40,50}
+	child := parent[1:4]
+	fmt.Println("Slice:",s)
+	fmt.Println("len:",len(s))
+	fmt.Println("Cap:", cap(s))
+	fmt.Println("child:",child)
+	child[0] = 99
+	fmt.Println("After modify child,Parent",parent)
+}
+
+   package main
+ import "fmt"
+
+ func main() {
+	s :=make([]int,1,1)
+	s = append(s,10)
+	fmt.Printf("s: %v, len: %d, cap: %d\n", s, len(s), cap(s))
+	s = append(s,20)
+	fmt.Printf("s: %v, len: %d, cap: %d\n",s,len(s),cap(s))
+	s = append(s,30)
+	fmt.Printf("s: %v, len: %d, cap: %d\n",s,len(s),cap(s))
+	s = append(s,40)
+	fmt.Printf("s: %v, len: %d, cap: %d\n",s,len(s),cap(s))
+	fmt.Printf("=======appendSlice 结束 =======\n")
+	}
+
+//第六章
+ package main
+ import "fmt"
+
+ func main() {
+	s :="我爱go语言"
+	for _,value  := range s {
+		fmt.Printf("%c",value)
+	}
+	fmt.Println()
+	fmt.Printf("%d",len(s))
+	for i,ch := range []byte(s){
+		fmt.Printf("%d:%x",i,ch)
+	}
+	fmt.Println()
+}
+
+
+ package main
+
+ import (
+	"fmt"
+	"strconv"
+)
+
+ func main() {
+	fmt.Println(strconv.ParseInt("123",10,64))
+	fmt.Println(strconv.ParseInt("0",10,64))
+	fmt.Println(strconv.ParseInt("123x",10,64))
+
+	fmt.Printf("%T \n",strconv.FormatInt(123,10))
+	fmt.Println("%T",strconv.FormatInt(0,10))
+}
+
+
+ package main
+
+ import (
+	"fmt"
+	"time"
+)
+
+ func main() {
+	t, _ := time.Parse("2006-01-02 15:04:05","2023-08-01 12:34:56")
+	fmt.Println("解析时间： ",t)
+	now :=time.Now()
+	fmt.Println("当前时间:", now.Format("2006/01/02 15:04:05"))
+	fmt.Println("24小时后的时间: ",now.Add(24*time.Hour))
+	fmt.Println("时间差: ", now.Sub(t))
+	fmt.Println("解析时间是否在当前时间之前: ",t.Before(now))
+	fmt.Println("解析时间是否在当前时间之后: ",t.After(now))
+}
+
+ package main
+ import (
+	"fmt"
+	"math/rand"
+	"time"
+)
+ func main(){
+	seed := rand.NewSource(time.Now().UnixNano())
+	r1 := rand.New(seed)
+	fmt.Println("随机数:", rand.Intn(100))
+	fmt.Println("随机数:",r1.Intn(100))
+	fmt.Println("随机浮点数: ",r1.Float64())
+}
+
+//第七章
+ package main
+
+ import "fmt" 
+func main(){
+	 var t1 Teacher 
+	 fmt.Println(t1)
+	 fmt.Printf("t1:%T , %v,%q \n",t1,t1,t1)
+	 t1.name = "Steven"
+	 t1.age = 35
+	 t1.sex = 1
+	 fmt.Println(t1)
+	 fmt.Println("--------------")
+
+
+
+	 t3 :=Teacher{
+		name:"Josh",
+		age:28,
+		sex:1,
+	}
+	 t3 = Teacher{name:"Josh2",age:27,sex:1}
+
+
+	 t4 := Teacher{"Ruby",30,0}
+	 fmt.Println(t4)
+	 fmt.Println("-------------------")
+
+	 emp1 :=new(Emp)
+	 fmt.Printf("emp1:%T,%v, %p\n",emp1,emp1,emp1)
+	 (*emp1).name = "David"
+	 (*emp1).age = 30
+	 (*emp1).sex = 1
+	 //语法糖化法
+	 emp1.name = "David"
+	 emp1.age = 30
+	 emp1.sex = 1
+}
+
+
+ func main(){
+	emp1 :=Employee{"Daniel","$",2000}
+	emp1.printSalary()
+	printSalary(emp1)
+	
+}
+
+ func (e Employee) printSalary() {
+	fmt.Printf("员工姓名：%s,薪资：%s%.2f \n",e.name,e.currency,e.salary)
+}
+ func printSalary(e Eployee ) {
+	fmt.Printf("员工姓名：%s,薪资：%s%.2f \n",e.name,e.currency,e.salary)
+}
+
+
+//第8章
+ package main
+
+ import "fmt" 
+
+
+ func main() {
+
+	res , err3 := checkAge(-12)
+	if err3 != nil {
+		fmt.Println(err3.Error())
+	} else {
+		fmt.Println(res)
+	}
+}
+func checkAge(age int) (string ,error) {
+	if age < 0 {
+		err := fmt.Errorf("您的年龄输入是： %d , 该数值为负数，有错误！",age)
+		return "",err
+	}else {
+		return fmt.Sprintf("您的年龄输入是： %d ",age),nil
+	}
+}
